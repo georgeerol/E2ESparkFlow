@@ -10,4 +10,6 @@ ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 
 USER airflow
 
-RUN pip install apache-airflow apache-airflow-providers-apache-spark pyspark install apache-airflow-providers-ssh
+# Install additional Python dependencies
+RUN pip install kafka-python apache-airflow-providers-apache-spark pyspark \
+                apache-airflow-providers-ssh apache-airflow-providers-http
