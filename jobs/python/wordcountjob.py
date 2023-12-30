@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName("PythonWordCount").getOrCreate()
 
-text = "Hello Spark Hello Python Hello Airflow Hello Docker and Hello Yusuf"
+text = "Hello Spark Hello Python Hello Airflow Hello Docker and Hello George"
 
 words = spark.sparkContext.parallelize(text.split(" "))
 

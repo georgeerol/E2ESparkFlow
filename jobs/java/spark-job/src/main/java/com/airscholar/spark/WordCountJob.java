@@ -21,7 +21,7 @@ public class WordCountJob
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
 		//hardcoded text
-		String text = "hello world hello spark hello docker hello Yusuf hello java";
+		String text = "hello world hello spark hello docker hello George hello java";
 		List<String> data = Arrays.asList(text.split(" "));
 
 		//parallelize the data
