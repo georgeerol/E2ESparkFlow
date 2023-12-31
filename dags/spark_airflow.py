@@ -3,6 +3,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 
+# Initialize the DAG with default arguments and schedule
 dag = DAG(
     dag_id="sparking_flow",
     default_args={
@@ -12,12 +13,14 @@ dag = DAG(
     schedule_interval="@daily"
 )
 
+# Define a PythonOperator for starting the job
 start = PythonOperator(
     task_id="start",
     python_callable=lambda: print("Jobs started"),
     dag=dag
 )
 
+# Define a SparkSubmitOperator for running a Python Spark job
 python_job = SparkSubmitOperator(
     task_id="python_job",
     conn_id="spark-conn",
@@ -25,6 +28,7 @@ python_job = SparkSubmitOperator(
     dag=dag
 )
 
+# Define a SparkSubmitOperator for running a Java Spark job
 java_job = SparkSubmitOperator(
     task_id="java_job",
     conn_id="spark-conn",
@@ -33,10 +37,12 @@ java_job = SparkSubmitOperator(
     dag=dag
 )
 
+# Define a PythonOperator for signaling the end of the job
 end = PythonOperator(
     task_id="end",
     python_callable=lambda: print("Jobs completed successfully"),
     dag=dag
 )
 
+# Define the task dependencies
 start >> [python_job, java_job] >> end

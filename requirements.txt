@@ -13,3 +13,5 @@ pyspark
 # Apache Cassandra
 cassandra-driver
 
+# HTTP Requests
+requests
