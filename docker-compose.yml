@@ -13,25 +13,25 @@ x-airflow-common: &airflow-common
   depends_on:
     - postgres
   networks:
-    - confluent
+    - code-with-george
 
 services:
   zookeeper:
-      image: confluentinc/cp-zookeeper:7.4.0
-      hostname: zookeeper
-      container_name: zookeeper
-      ports:
-        - "2181:2181"
-      environment:
-        ZOOKEEPER_CLIENT_PORT: 2181
-        ZOOKEEPER_TICK_TIME: 2000
-      healthcheck:
-        test: ['CMD', 'bash', '-c', "echo 'ruok' | nc localhost 2181"]
-        interval: 10s
-        timeout: 5s
-        retries: 5
-      networks:
-        - confluent
+    image: confluentinc/cp-zookeeper:7.4.0
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    healthcheck:
+      test: [ 'CMD', 'bash', '-c', "echo 'ruok' | nc localhost 2181" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - code-with-george
 
   broker:
     image: confluentinc/cp-server:7.4.0
@@ -63,7 +63,7 @@ services:
       CONFLUENT_METRICS_ENABLE: 'false'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     networks:
-      - confluent
+      - code-with-george
     healthcheck:
       test: [ "CMD", "bash", "-c", 'nc -z localhost 9092' ]
       interval: 10s
@@ -84,7 +84,7 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
     networks:
-      - confluent
+      - code-with-george
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8081/" ]
       interval: 30s
@@ -111,7 +111,7 @@ services:
       CONFLIENT_METRICS_ENABLE: 'false'
       PORT: 9021
     networks:
-      - confluent
+      - code-with-george
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9021/health" ]
       interval: 30s
@@ -141,7 +141,7 @@ services:
         max-size: 10m
         max-file: "3"
     networks:
-      - confluent
+      - code-with-george
 
   spark-master:
     container_name: spark-master
@@ -153,12 +153,13 @@ services:
     volumes:
       - ./jobs:/opt/bitnami/spark/jobs
       - ./examples:/opt/bitnami/spark/examples
+      - ./services:/opt/bitnami/spark/services
       - ./requirements.txt:/requirements.txt
     ports:
       - "9090:8080"
       - "7077:7077"
     networks:
-      - confluent
+      - code-with-george
 
   spark-worker: &worker
     container_name: spark-worker
@@ -170,6 +171,7 @@ services:
     volumes:
       - ./jobs:/opt/bitnami/spark/jobs
       - ./examples:/opt/bitnami/spark/examples
+      - ./services:/opt/bitnami/spark/services
       - ./requirements.txt:/requirements.txt
     depends_on:
       - spark-master
@@ -179,16 +181,23 @@ services:
       SPARK_WORKER_MEMORY: 2g
       SPARK_MASTER_URL: spark://spark-master:7077
     networks:
-      - confluent
+      - code-with-george
 
-#  spark-worker-2:
-#    <<: *worker
-#
-#  spark-worker-3:
-#    <<: *worker
-#
-#  spark-worker-4:
-#    <<: *worker
+  spark-worker-2:
+    <<: *worker
+    container_name: spark-worker-2
+    hostname: spark-worker-2
+
+  #  spark-worker-3:
+  #    <<: *worker
+  #    container_name: spark-worker-3
+  #    hostname: spark-worker-3
+  #
+  #
+  #  spark-worker-4:
+  #    <<: *worker
+  #    container_name: spark-worker-4
+  #    hostname: spark-worker-4
 
   cassandra_db:
     image: cassandra:latest
@@ -202,6 +211,6 @@ services:
       - CASSANDRA_USERNAME=cassandra
       - CASSANDRA_PASSWORD=cassandra
     networks:
-      - confluent
+      - code-with-george
 networks:
-  confluent:
+  code-with-george:
