@@ -1,7 +1,8 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-from pyspark.sql import Row
+from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
 
 # Create a Spark Session with Cassandra configuration
 spark = SparkSession.builder \
@@ -13,9 +14,6 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # Initialize Cassandra connection
-from cassandra.cluster import Cluster
-from cassandra.auth import PlainTextAuthProvider
-
 auth_provider = PlainTextAuthProvider(username='cassandra', password='cassandra')
 cluster = Cluster(['cassandra'], port=9042, auth_provider=auth_provider)
 session = cluster.connect()
@@ -52,7 +50,7 @@ session.shutdown()
 kafka_topic_name = "users_created"
 kafka_bootstrap_servers = "broker:29092"
 
-# Define the schema
+# Define the schema for the data to be processed
 schema = StructType([
     StructField("id", StringType(), False),
     StructField("first_name", StringType(), False),
@@ -68,7 +66,7 @@ schema = StructType([
     StructField("picture", StringType(), False)
 ])
 
-# Read from Kafka
+# Read data from Kafka
 df = spark \
     .readStream \
     .format("kafka") \
@@ -77,14 +75,14 @@ df = spark \
     .option("startingOffsets", "earliest") \
     .load()
 
-# Assuming the value in Kafka is a JSON string matching the schema
+# Parse the incoming data assuming it's in JSON format
 df = df.select(from_json(col("value").cast("string"), schema).alias("data")).select("data.*")
 
 # Define Cassandra Table Details
 cassandra_keyspace = "user_data"
 cassandra_table = "users"
 
-# Write to Cassandra
+# Write the processed data to Cassandra
 query = df.writeStream \
     .format("org.apache.spark.sql.cassandra") \
     .option("keyspace", cassandra_keyspace) \
