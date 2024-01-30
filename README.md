@@ -16,9 +16,6 @@ These tools work together to take in, handle, and keep data.
 7. **PostgreSQL**: A powerful, open-source object-relational database system. It uses and extends the SQL language combined with many features that safely store and scale complicated data workloads.
 8. **Docker**: A platform for developing, shipping, and running applications. It enables you to separate your applications from your infrastructure so you can deliver software quickly. Docker packages software into standardized units called containers that have everything the software needs to run including libraries, system tools, code, and runtime.
 
-Certainly! Here's a README section that you can include in your project's documentation to guide users on how to install and start a Python virtual environment (venv):
-
-
 # Setting Up a Python Virtual Environment
 
 A Python virtual environment (venv) allows you to create isolated Python environments for your projects. This ensures that your project's dependencies do not interfere with the global Python installation and helps manage package dependencies efficiently.
