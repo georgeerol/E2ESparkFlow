@@ -7,16 +7,14 @@ These tools work together to take in, handle, and keep data.
 
 
 # Technologies
-1. **Apache Airflow**is a platform for programmatically authoring, scheduling, and monitoring workflows. It allows you to organize and manage tasks efficiently.
-2. **Python**: A popular programming language known for its readability and versatility. It's widely used for web development, data analysis, artificial intelligence, and scientific computing.
-3. **Apache Kafka**: A distributed streaming platform. It's used for building real-time data pipelines and streaming apps. It can handle high-throughput data feeds.
-4. **Apache Zookeeper**: A centralized service for maintaining configuration information, naming, distributed synchronization, and group services, it's often used in distributed systems to manage their services.
-5. **Apache Spark**: An open-source, distributed processing system for big data workloads. It provides development APIs in Python, Java, Scala, and R, and an optimized engine that supports general computation graphs.
-6. ** Cassandra ** is a distributed NoSQL database designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure.
-7. **PostgreSQL**: A powerful, open-source object-relational database system. It uses and extends the SQL language with many features that safely store and scale complicated data workloads.
-8. **Docker**: A platform for developing, shipping, and running applications. It enables you to separate your applications from your infrastructure to quickly deliver software. Docker packages software into standardized units called containers with everything the software needs to run, including libraries, system tools, code, and runtime.
+1. **Apache Airflow**: An open-source platform used to programmatically author, schedule, and monitor workflows. Supports Python for workflow authoring.
+2. **Apache Kafka**: An open-source distributed streaming platform for fault tolerance, high throughput, and a publish-subscribe messaging system.
+3. **Apache Spark**: An open-source, powerful processing engine capable of handling intensive big data workloads. Its ability to perform batch processing, stream processing, and machine learning makes it an excellent tool for all data processing needs.
+4. **Apache Cassandra**: An open-source NoSQL database, excellent for handling large amounts of write-heavy data. Its distributed design offers high availability without compromising fault tolerance, crucial for systems requiring uninterrupted operation.
+5. **PostgreSQL**: An open-source relational database, in this case, focused on saving Airflow metadata.
+6. **Docker**: An open-source containerization tool allowing isolated, consistent, and accessible deployment. Containers ensure consistency across multiple development, testing, and production environments, reducing the “it works on my machine” problem.
+7. **Apache Zookeeper**: An open-source centralized service for maintaining configuration information, naming, and providing distributed synchronization. Essential for managing clustered services like Kafka.
 
-Certainly! Here's an additional section on how to start the project using Docker Compose, which can be added to your existing documentation:
 
 ---
 
@@ -50,7 +48,7 @@ Docker Compose is a tool for defining and running multi-container Docker applica
 
 4. **Verify the Services:**
    - Once the containers are up and running, you can verify that each service functions correctly.
-   - You can access the web interfaces of services like Apache Airflow, through your web browser.
+   - You can access the web interfaces of services, like Apache Airflow, through your web browser.
 
 5. **Stopping the Services:**
    - To stop and remove the containers, use the following command in the same directory:
