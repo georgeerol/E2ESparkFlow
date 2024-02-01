@@ -107,7 +107,7 @@ To start the `sparking_flow` DAG, a Spark Connection is required.
     - **Spark Binary**: `spark-submit`
 
     Configure as shown and click the `Save` button.
-    ![Set Spark Connection](./imgs/SetSparkConnectionForSparkingFlow.PNG)
+    ![Set Spark Connection](./imgs/SparkConnectionConfiguration.PNG)
 
     After saving, the `spark-conn` connection should appear in the list.
 
@@ -130,3 +130,5 @@ Navigate back to the main page and start the `sparking_flow` DAG by toggling its
 
 - **Java Job Log**: Click on the `java_job` task, then logs to view the job result.
     ![Java Job Log](./imgs/JavaJob.PNG)
+
+## Accessing Kafka Control Center
