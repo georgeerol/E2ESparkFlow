@@ -107,7 +107,7 @@ To start the `sparking_flow` DAG, a Spark Connection is required.
     - **Spark Binary**: `spark-submit`
 
     Configure as shown and click the `Save` button.
-    ![Set Spark Connection](./imgs/SetSparkConnectionForSparkingFlow.PNG)
+    ![Set Spark Connection](./imgs/SparkConnectionConfiguration.PNG)
 
     After saving, the `spark-conn` connection should appear in the list.
 
