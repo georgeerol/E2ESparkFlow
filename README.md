@@ -130,3 +130,19 @@ Navigate back to the main page and start the `sparking_flow` DAG by toggling its
 
 - **Java Job Log**: Click on the `java_job` task, then logs to view the job result.
     ![Java Job Log](./imgs/JavaJob.PNG)
+
+## Accessing Kafka Confluent Control Center
+After using Airflow, you can access Kafka Confluent Control Center by navigating to [http://localhost:9021/](http://localhost:9021/).
+
+### Kafka Confluent Control Center Main Page
+![Kafka Confluent Main Page](./imgs/KafkaConfluentMainPage.PNG)
+- Click on `controlcenter.cluster` to access the Cluster Overview.
+
+### Viewing Kafka Topics
+- In the Cluster Overview, select `topics`. Here, you should find the `user_created` topic. If it is not visible, ensure the `user_automation` DAG is started in Airflow.
+    ![User Created Topics](./imgs/UserCreatedTopics.PNG)
+
+- Clicking on `user_created` will display the topic messages.
+    ![Users Created Messages](./imgs/UsersCreatedMessages.PNG)
+
+---
