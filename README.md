@@ -47,7 +47,7 @@ Docker Compose is a tool for defining and running multi-container Docker applica
    - This command builds the images for your services (if not already built) and starts the containers.
 
 4. **Verify the Services:**
-   - Once the containers are up and running, you can verify that each service functions correctly.
+   - Once the containers run, you can verify that each service functions correctly.
    - You can access the web interfaces of services, like Apache Airflow, through your web browser.
 
 5. **Stopping the Services:**
