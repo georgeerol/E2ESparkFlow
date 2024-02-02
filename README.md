@@ -59,18 +59,6 @@ Docker Compose is a tool for defining and running multi-container Docker applica
 
    - This command stops all the running containers and removes them and their networks.
 
-Certainly, let's format and improve the flow of the provided markdown:
-
----
-
-Thank you for providing the API link. To incorporate it into the markdown, I'll update the reference under the "Data Ingestion" section. Here's the revised markdown with the API link included:
-
----
-
-Let's update the markdown to include the new information about starting the Spark Streamer Service, adding more workers, and accessing the Spark UI:
-
----
-
 # Architecture Flow
 
 ## 1. Data Ingestion
