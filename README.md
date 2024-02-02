@@ -67,6 +67,10 @@ Thank you for providing the API link. To incorporate it into the markdown, I'll 
 
 ---
 
+Let's update the markdown to include the new information about starting the Spark Streamer Service, adding more workers, and accessing the Spark UI:
+
+---
+
 # Architecture Flow
 
 ## 1. Data Ingestion
@@ -144,5 +148,26 @@ After using Airflow, you can access Kafka Confluent Control Center by navigating
 
 - Clicking on `user_created` will display the topic messages.
     ![Users Created Messages](./imgs/UsersCreatedMessages.PNG)
+
+## Spark UI and Streamer Service
+
+### Accessing Spark UI
+- To view the Spark UI, navigate to [http://localhost:9090/](http://localhost:9090/). Here you will see two workers and a completed application job `PythonWordCount` submitted by airflow.
+    ![Spark UI](./imgs/SparkUI.PNG)
+- **Note**: The `PythonWordCount` job is visible only if the `sparking_flow` DAG has been run.
+
+### Adding More Workers
+- To add more workers to Spark, uncomment the specified code in the `docker-compose` file.
+    ![Add Spark Workers](./imgs/AddSparkWorkers.PNG)
+
+### Starting The Spark Streamer Service
+- To start the Spark Streamer Service, use the
+ Docker Desktop Exec of the `Spark Master` container.
+- Navigate to the service folder and run the following command:
+  ```
+  spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.13:3.4.1,com.datastax.spark:spark-cassandra-connector_2.13:3.4.1 spark_stream.py
+  ```
+    ![Start Spark Streamer Service](./imgs/StartSparkStreamerService.PNG)
+- **Important**: Ensure there is data from 'User Created' in Kafka; otherwise, the streamer will wait for new data.
 
 ---
