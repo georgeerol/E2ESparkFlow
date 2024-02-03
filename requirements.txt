@@ -8,10 +8,10 @@ apache-airflow-providers-ssh
 apache-airflow-providers-http
 
 # Apache Spark
-pyspark
+pyspark==3.4.1
 
 # Apache Cassandra
-cassandra-driver
+cassandra-driver==3.28.0
 
 # HTTP Requests
-requests
+requests==2.31.0
