@@ -153,9 +153,19 @@ After using Airflow, you can access Kafka Confluent Control Center by navigating
  Docker Desktop Exec of the `Spark Master` container.
 - Navigate to the service folder and run the following command:
   ```
-  spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.13:3.4.1,com.datastax.spark:spark-cassandra-connector_2.13:3.4.1 spark_stream.py
+  spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1,com.datastax.spark:spark-cassandra-connector_2.12:3.0.0 spark_stream.py
   ```
     ![Start Spark Streamer Service](./imgs/StartSparkStreamerService.PNG)
 - **Important**: Ensure there is data from 'User Created' in Kafka; otherwise, the streamer will wait for new data.
+
+## Accessing Data From Cassandra
+
+- To access data stored in Cassandra, execute the following command in the terminal:
+  ```
+  docker exec -it cassandra cqlsh -u cassandra -p cassandra localhost 9042
+  SELECT * FROM user_data.users;
+  ```
+- The command provides access to the Cassandra database where you can execute queries such as `SELECT * FROM user_data.users;` to view the user data.
+    ![Cassandra Data](./imgs/CassandraData.PNG)
 
 ---
